@@ -19,7 +19,7 @@ namespace AdventOfCode.Days
             }
         }
 
-        public static void SolveProblem()
+        public static void SolvePart1()
         {
             ReadData();
 
@@ -34,6 +34,29 @@ namespace AdventOfCode.Days
                     timesIncreased += 1;
                 }
                 currentDepth = depths[i];
+            }
+
+            Console.WriteLine($"The depth increased {timesIncreased} times");
+        }
+
+        public static void SolvePart2()
+        {
+            var currentLow = 0;
+            var currentDepths = depths.GetRange(currentLow, 3);
+            var currentDepth = currentDepths.Sum();
+            var timesIncreased = 0;
+
+            for (int i=1; i < depths.Count - 2; i++)
+            {
+                var nextDepths = depths.GetRange(currentLow + 1, 3);
+                var nextDepth = nextDepths.Sum();
+                if (nextDepth > currentDepth)
+                {
+                    timesIncreased += 1;
+                }
+                currentDepths = nextDepths;
+                currentDepth = nextDepth;
+                currentLow += 1;
             }
 
             Console.WriteLine($"The depth increased {timesIncreased} times");
