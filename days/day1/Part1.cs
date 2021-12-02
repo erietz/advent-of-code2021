@@ -7,7 +7,7 @@ namespace AdventOfCode.Days
 {
     class Day1
     {
-        public static string dataFile = "problems/day1-part1.txt";
+        public static string dataFile = "./problems/day1-part1.txt";
         public static List<int> depths = new List<int>();
 
         private static void ReadData()
