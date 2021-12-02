@@ -1,15 +1,12 @@
-﻿using System;
-using AdventOfCode.Days;
+﻿using AdventOfCode.Days;
 
 namespace AdventOfCode
 {
-    class Foo
+    class Program
     {
         static void Main(string[] args)
         {
-
-            Console.WriteLine("Hello World");
-            Day1.Test();
+            Day1.SolveProblem();
         }
     }
 }
