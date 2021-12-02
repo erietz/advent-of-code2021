@@ -10,7 +10,7 @@ namespace AdventOfCode.Days
         public static string dataFile = "./problems/day1-part1.txt";
         public static List<int> depths = new List<int>();
 
-        private static void ReadData()
+        static Day1()
         {
             var data = File.ReadAllLines(dataFile).ToArray();
             foreach (string line in data)
@@ -21,7 +21,6 @@ namespace AdventOfCode.Days
 
         public static void SolvePart1()
         {
-            ReadData();
 
             var currentDepth = depths[0];
             var timesIncreased = 0;
