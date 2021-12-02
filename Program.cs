@@ -1,2 +1,15 @@
-﻿// See https://aka.ms/new-console-template for more information
-Console.WriteLine("Hello, World!");
+﻿using System;
+using AdventOfCode.Days;
+
+namespace AdventOfCode
+{
+    class Foo
+    {
+        static void Main(string[] args)
+        {
+
+            Console.WriteLine("Hello World");
+            Day1.Test();
+        }
+    }
+}
