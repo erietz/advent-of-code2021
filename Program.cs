@@ -15,10 +15,12 @@ namespace AdventOfCode
             /* Console.WriteLine("Part 2"); */
             /* Day2.SolvePart2(); */
 
-            Console.WriteLine("Part 1");
-            Day3.SolvePart1();
+            /* Console.WriteLine("Part 1"); */
+            /* Day3.SolvePart1(); */
 
-            Console.WriteLine("");
+            /* Console.WriteLine(""); */
+
+            Day3.SolvePart2();
 
             /* Console.WriteLine("Part 2"); */
             /* Day3.SolvePart2(); */
