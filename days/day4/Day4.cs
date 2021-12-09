@@ -8,10 +8,13 @@ namespace AdventOfCode
     class Day4
     {
         public static List<int> numbers = new List<int>();
-        public static List<int[]> boards = new List<int[]>();
+        public static List<int[,]> boards = new List<int[,]>();
+        public static List<int[,]> boardsFilled = new List<int[,]>();
 
         static Day4()
         {
+            Console.WriteLine("Constructor called");
+
             string inputFile = "problems/day4.txt";
             var lines = File.ReadAllLines(inputFile);
 
@@ -28,6 +31,7 @@ namespace AdventOfCode
             {
                 if (line == "")
                 {
+                    boards.Add(board);
                     board = new int[5,5];
                     i = 0;
                     continue;
@@ -45,10 +49,112 @@ namespace AdventOfCode
                     i += 1;
                 }
             }
+
+            for (int x=0; x<boards.Count(); x++)
+            {
+                boardsFilled.Add(new int[5,5]);
+            }
         }
 
-        public static void Foo()
+        public static void PrintBoards()
         {
+            for (int i=0; i<boards.Count(); i++)
+            {
+                for (int j=0; j<5; j++)
+                {
+                    for (int k=0; k<5; k++)
+                    {
+                        Console.Write("{0} ", boards[i][j,k]);
+                    }
+                    Console.WriteLine();
+                }
+                Console.WriteLine();
+            }
         }
+
+        public static bool BoardIsWinner(int boardIndex)
+        {
+            var board = boardsFilled[boardIndex];
+
+            var rowTotal = 0;
+            for (int i=0; i<5; i++)
+            {
+                for (int j=0; j<5; j++)
+                {
+                    if (board[i, j] == 1)
+                    {
+                        rowTotal += 1;
+                    }
+                }
+                if (rowTotal == 5)
+                {
+                    return true;
+                }
+                rowTotal = 0;
+            }
+
+            var columnTotal = 0;
+            for (int j=0; j<5; j++)
+            {
+                for (int i=0; i<5; i++)
+                {
+                    if (board[i, j] == 1)
+                    {
+                        columnTotal += 1;
+                    }
+                }
+                if (columnTotal == 5)
+                {
+                    return true;
+                }
+                columnTotal = 0;
+            }
+
+            return false;
+        }
+
+        public static void CalculateAnswer(int num, int boardIndex)
+        {
+            int sum = 0;
+            for (int i=0; i<5; i++)
+            {
+                for (int j=0; j<5; j++)
+                {
+                    var value = boardsFilled[boardIndex][i,j];
+                    if (value == 0)
+                    {
+                        sum += boards[boardIndex][i,j];
+                        /* Console.WriteLine(sum); */
+                    }
+                }
+            }
+            Console.WriteLine("The solution is {0} * {1} = {2}", sum, num, sum * num);
+        }
+
+        public static void PlayBingo()
+        {
+            foreach (var num in numbers)
+            {
+                for (int i=0; i<boards.Count(); i++)
+                {
+                    for (int j=0; j<5; j++)
+                    {
+                        for (int k=0; k<5; k++)
+                        {
+                            if (boards[i][j,k] == num)
+                            {
+                                boardsFilled[i][j,k] = 1;
+                            }
+                        }
+                    }
+                    if (BoardIsWinner(i))
+                    {
+                        CalculateAnswer(num, i);
+                        return;
+                    }
+                }
+            }
+        }
+
     }
 }

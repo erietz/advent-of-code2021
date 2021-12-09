@@ -6,7 +6,8 @@ namespace AdventOfCode
     {
         static void Main(string[] args)
         {
-            Day4.Foo();
+            /* Day4.PrintBoards(); */
+            Day4.PlayBingo();
         }
     }
 }
