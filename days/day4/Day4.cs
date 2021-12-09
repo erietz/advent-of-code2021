@@ -56,6 +56,20 @@ namespace AdventOfCode
             }
         }
 
+        public static void ResetBoards()
+        {
+            for (int i=0; i<boards.Count(); i++)
+            {
+                for (int j=0; j<5; j++)
+                {
+                    for (int k=0; k<5; k++)
+                    {
+                        boardsFilled[i][j,k] = 0;
+                    }
+                }
+            }
+        }
+
         public static void PrintBoards()
         {
             for (int i=0; i<boards.Count(); i++)
@@ -64,7 +78,8 @@ namespace AdventOfCode
                 {
                     for (int k=0; k<5; k++)
                     {
-                        Console.Write("{0} ", boards[i][j,k]);
+                        /* Console.Write("{0} ", boards[i][j,k]); */
+                        Console.Write("{0} ", boardsFilled[i][j,k]);
                     }
                     Console.WriteLine();
                 }
@@ -124,7 +139,6 @@ namespace AdventOfCode
                     if (value == 0)
                     {
                         sum += boards[boardIndex][i,j];
-                        /* Console.WriteLine(sum); */
                     }
                 }
             }
@@ -154,6 +168,54 @@ namespace AdventOfCode
                     }
                 }
             }
+        }
+
+        public static void FindLastBoardToWin()
+        {
+
+            var winners = new List<int>();
+            for (int i=0; i<boards.Count(); i++)
+            {
+                winners.Add(0);
+            }
+
+            /* PrintBoards(); */
+            ResetBoards();
+            /* Console.WriteLine("Boards have been reset"); */
+            /* PrintBoards(); */
+
+            int lastNumber=-1, lastBoardIndex=-1;
+            foreach (var num in numbers)
+            {
+                for (int i=0; i<boards.Count(); i++)
+                {
+                    for (int j=0; j<5; j++)
+                    {
+                        for (int k=0; k<5; k++)
+                        {
+                            if (boards[i][j,k] == num)
+                            {
+                                boardsFilled[i][j,k] = 1;
+                            }
+                        }
+                    }
+                    if (BoardIsWinner(i))
+                    {
+                        winners[i] = 1;
+                        lastBoardIndex = i;
+                        lastNumber = num;
+                        if (winners.Sum() == boards.Count())
+                        {
+                            Console.WriteLine("lastNumber {0} lastBoardIndex {1}", lastNumber, lastBoardIndex);
+                            CalculateAnswer(lastNumber, lastBoardIndex);
+                            return;
+                        }
+                    }
+                }
+            }
+
+            Console.WriteLine("lastNumber {0} lastBoardIndex {1}", lastNumber, lastBoardIndex);
+            CalculateAnswer(lastNumber, lastBoardIndex);
         }
 
     }

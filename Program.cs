@@ -8,6 +8,7 @@ namespace AdventOfCode
         {
             /* Day4.PrintBoards(); */
             Day4.PlayBingo();
+            Day4.FindLastBoardToWin();
         }
     }
 }
