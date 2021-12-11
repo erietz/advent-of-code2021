@@ -6,9 +6,7 @@ namespace AdventOfCode
     {
         static void Main(string[] args)
         {
-            /* Day4.PrintBoards(); */
-            Day4.PlayBingo();
-            Day4.FindLastBoardToWin();
+            Day5.PrintSegments();
         }
     }
 }
