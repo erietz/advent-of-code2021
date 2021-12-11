@@ -6,7 +6,8 @@ namespace AdventOfCode
     {
         static void Main(string[] args)
         {
-            Day5.PrintSegments();
+            /* Day5.PrintSegments(); */
+            Day5.SolvePart1();
         }
     }
 }

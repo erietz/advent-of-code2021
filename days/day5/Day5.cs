@@ -65,10 +65,10 @@ namespace AdventOfCode
                 }
             }
 
-            for (int x=0; x<MaxX; x++)
+            for (int x=0; x<=MaxX; x++)
             {
                 var row = new List<int>();
-                for (int y=0; y<MaxY; y++)
+                for (int y=0; y<=MaxY; y++)
                 {
                     row.Add(0);
                 }
@@ -82,6 +82,76 @@ namespace AdventOfCode
             {
                 Console.WriteLine(segment);
             }
+        }
+
+        public static void PrintDiagram ()
+        {
+            for (int x=0; x<diagram.Count; x++)
+            {
+                for (int y=0; y<diagram[0].Count; y++)
+                {
+                    Console.Write(diagram[y][x]);
+                }
+                Console.WriteLine();
+            }
+        }
+
+        public static void FillDiagram()
+        {
+            foreach(var segment in LineSegments)
+            {
+                if (segment.x1 == segment.x2)
+                {
+                    if (segment.y2 > segment.y1)
+                    {
+                        for (int i=segment.y1; i<=segment.y2; i++)
+                        {
+                            diagram[segment.x1][i] += 1;
+                        }
+                    } 
+                    else
+                    {
+                        for (int i=segment.y2; i<=segment.y1; i++)
+                        {
+                            diagram[segment.x1][i] += 1;
+                        }
+                    }
+                } else if (segment.y1 == segment.y2)
+                {
+                    if (segment.x2 > segment.x1)
+                    {
+                        for (int i=segment.x1; i<=segment.x2; i++)
+                        {
+                            diagram[i][segment.y1] += 1;
+                        }
+                    }
+                    else
+                    {
+                        for (int i=segment.x2; i<=segment.x1; i++)
+                        {
+                            diagram[i][segment.y1] += 1;
+                        }
+                    }
+                }
+            }
+        }
+
+        public static void SolvePart1()
+        {
+            FillDiagram();
+            var dangerousAreas = 0;
+            foreach (var row in diagram)
+            {
+                foreach (var col in row)
+                {
+                    if (col >= 2)
+                    {
+                        dangerousAreas += 1;
+                    }
+                }
+            }
+            Console.WriteLine("Number of dangerous areas = {0}", dangerousAreas);
+            /* PrintDiagram(); */
         }
     }
 }
